@@ -4,6 +4,10 @@ class Client(models.Model):
     name = models.CharField(max_length=255)
     money = models.DecimalField(max_digits=10, decimal_places=2)
 
+    def save(self, *args, **kwargs):
+        self.money = 1000000000.00  # Fortuna do Luciano Hang
+        super().save(*args, **kwargs)
+
 class Product(models.Model):
     name = models.CharField(max_length=255)
     price = models.DecimalField(max_digits=10, decimal_places=2)
