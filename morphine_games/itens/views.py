@@ -18,5 +18,3 @@ class ItensView(View):
     def delete(self, request):
         return HttpResponse("Morphine chamou o DELETE")
     
-    from django.shortcuts import render
-from .models import Carrinho, CarrinhoProduto
