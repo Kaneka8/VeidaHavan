@@ -10,9 +10,32 @@ from itens.models import Produtos
 
 @method_decorator(csrf_exempt, name='dispatch')
 class ItensView(View):
-    def get(self, request):
-        return HttpResponse("Morphine chamou o GET")
-    
+    def get(self, request,):
+        if 'id' in request.GET:
+            item_id = request.GET.get('id')
+            try:
+                item = Produtos.objects.get(id=item_id)
+                data = {
+                    'id': item.id,
+                    'name': item.name,
+                    'price': str(item.price),
+                    'image_url': item.image_url
+                }
+                return HttpResponse(json.dumps(data), content_type='application/json')
+            except Produtos.DoesNotExist:
+                return HttpResponseNotFound("Item not found")
+        else:
+            items = Produtos.objects.all()
+            data = []
+            for item in items:
+                data.append({
+                    'id': item.id,
+                    'name': item.name,
+                    'price': str(item.price),
+                    'image_url': item.image_url
+                })
+            return HttpResponse(json.dumps(data), content_type='application/json')
+        
     def post(self, request):
         data = json.loads(request.body)
         item = Produtos(
@@ -22,6 +45,7 @@ class ItensView(View):
         )
         item.save()
         return HttpResponse("Item created successfully!")
+    
     def put(self, request):
         data = json.loads(request.body)
         item_id = data.get('id')
