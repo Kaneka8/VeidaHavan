@@ -21,7 +21,7 @@ class ItensView(View):
             image_url=data.get('image_url')
         )
         item.save()
-        return HttpResponse("Item created successfully!")
+        return HttpResponse("Item Criado painho!")
     
 def put(self, request):
     data = json.loads(request.body)
@@ -35,10 +35,9 @@ def put(self, request):
             item.save()
             return HttpResponse("Item updated successfully!")
         except Produtos.DoesNotExist:
-            return HttpResponseNotFound("Item not found")
+            return HttpResponseNotFound("Item não encontrado")
     else:
-        return HttpResponseBadRequest("Item ID is required")
+        return HttpResponseBadRequest("necessario Item ID")
     
     def delete(self, request):
         return HttpResponse("Morphine chamou o DELETE")
-    
