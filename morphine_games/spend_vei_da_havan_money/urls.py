@@ -21,5 +21,6 @@ from itens.views import ItensView
 
 urlpatterns = [
     path('itens/', ItensView.as_view(), name='itens-view'),
+    path('itens/<int:id>/', ItensView.as_view(), name='item-detail'),
     path('admin/', admin.site.urls),
 ]
