@@ -1,4 +1,3 @@
-from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseNotFound
 from django.views import View
 from django.utils.decorators import method_decorator
@@ -6,7 +5,7 @@ from django.views.decorators.csrf import csrf_exempt
 
 import json
 
-from itens.models import Produtos
+from itens.models import Produtos 
 
 @method_decorator(csrf_exempt, name='dispatch')
 class ItensView(View):
