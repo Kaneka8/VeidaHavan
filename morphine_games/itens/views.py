@@ -9,9 +9,8 @@ from itens.models import Produtos
 
 @method_decorator(csrf_exempt, name='dispatch')
 class ItensView(View):
-    def get(self, request,):
-        if 'id' in request.GET:
-            item_id = request.GET.get('id')
+    def get(self, request, item_id=None):
+        if item_id:
             try:
                 item = Produtos.objects.get(id=item_id)
                 data = {
